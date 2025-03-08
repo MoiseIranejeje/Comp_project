@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Space Typist",
+    "version": "1.0",
+    "description": "Master typing offline with a space-themed challenge! Built for Hack Club BrowserBuddy.",
+    "offline_enabled": true,
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "k1.png",
+        "48": "k2.png",
+        "128": "k3.png"
+      }
+    },
+    "permissions": ["storage"]
+  }

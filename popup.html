@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Space Typist</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Space Typist</h1>
+    <p>Repair your ship—aim for the stars!</p>
+    <div id="progressBar"><div id="progress"></div></div>
+    <div id="stats">
+      <span>Level: <span id="levelNum">1</span></span> |
+      <span>Time: <span id="timeLeft">15</span>s</span> |
+      <span>Streak: <span id="streak">0</span></span>
+    </div>
+    <div id="wordDisplay">Click to Start</div>
+    <input type="text" id="input" disabled>
+    <div id="feedback"></div>
+    <div id="pointPop"></div>
+    <p>Score: <span id="score">0</span> | High Score: <span id="highScore">0</span></p>
+    <p>WPM: <span id="wpm">0</span> | Accuracy: <span id="accuracy">100</span>%</p>
+    <p>Errors: <span id="errors">0</span> | Rank: <span id="rank">Unranked</span></p>
+    <button id="restart" style="display:none;">Restart Mission</button>
+    <script src="script.js"></script>
+  </body>
+</html>
