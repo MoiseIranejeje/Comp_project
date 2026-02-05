@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Byiringiro Albert</title>
+    <link rel="stylesheet" href="../frontend/assets/css/main.css" />
+    <script defer src="../frontend/assets/js/admin.js"></script>
+  </head>
+  <body data-page="dashboard">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../frontend/index.html">Publication Admin</a>
+        <button class="btn btn-secondary" id="logout" type="button">Logout</button>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container" style="display: grid; gap: 24px">
+        <section class="form-card" style="padding: 24px">
+          <h1>Manage Publications</h1>
+          <p class="muted">
+            Add metadata and embed-ready links (Google Drive preview or hosted web document URLs).
+          </p>
+          <form id="pub-form" class="form-grid">
+            <div>
+              <label for="title">Title</label>
+              <input id="title" name="title" required />
+            </div>
+            <div>
+              <label for="abstract">Abstract</label>
+              <textarea id="abstract" name="abstract" required></textarea>
+            </div>
+            <div>
+              <label for="year">Year</label>
+              <input id="year" name="year" type="number" min="1990" max="2100" required />
+            </div>
+            <div>
+              <label for="category">Category</label>
+              <input id="category" name="category" required />
+            </div>
+            <div>
+              <label for="embedLink">Embed Link (preview mode URL)</label>
+              <input id="embedLink" name="embedLink" type="url" required />
+            </div>
+            <label style="display:flex; align-items:center; gap:8px;">
+              <input type="checkbox" name="featured" style="width:auto" /> Feature on homepage
+            </label>
+            <button class="btn btn-primary" type="submit">Save Publication</button>
+          </form>
+        </section>
+
+        <section class="form-card" style="padding: 24px">
+          <h2>Current Publication Metadata</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Year</th>
+                  <th>Category</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="pub-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
