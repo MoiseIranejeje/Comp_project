@@ -84,6 +84,33 @@ a { color: inherit; text-decoration: none; }
 .card { padding: 18px; }
 .meta, .muted { color: var(--muted); }
 
+.info-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #cfe0ff;
+}
+
+.support-card {
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(119, 167, 255, 0.12), rgba(157, 125, 255, 0.1));
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+}
+
+.support-card strong { font-size: 1.05rem; color: #f0f6ff; }
+.support-card a { color: #d9e6ff; }
+
 .stat-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top: 14px; }
 .stat { padding: 16px; }
 .stat strong { display: block; font-size: 1.7rem; color: #f3f7ff; }

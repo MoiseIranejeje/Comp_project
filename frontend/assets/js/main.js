@@ -82,20 +82,11 @@ function renderAllPublications() {
   target.innerHTML = appState.publications.map(publicationCard).join("");
 }
 
-function trackVisit() {
-  fetch("/api/visits", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ path: window.location.pathname })
-  }).catch(() => {});
-}
-
 async function initMain() {
   appState.publications = await loadPublications();
   renderFeatured();
   renderAllPublications();
   window.dispatchEvent(new Event("contentRendered"));
-  trackVisit();
 }
 
 initMain();
