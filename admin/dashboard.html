@@ -3,9 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@600;700&display=swap" rel="stylesheet" />
     <title>Admin Dashboard | Byiringiro Albert</title>
     <link rel="stylesheet" href="../frontend/assets/css/main.css" />
     <script defer src="../frontend/assets/js/admin.js"></script>
@@ -21,23 +18,10 @@
     <main class="section">
       <div class="container" style="display: grid; gap: 24px">
         <section class="form-card" style="padding: 24px">
-          <h1>Site Analytics</h1>
-          <p class="muted">Live visit totals for reader and portfolio activity.</p>
-          <div class="stat-grid" style="margin-top: 16px">
-            <article class="stat">
-              <strong id="total-visits">0</strong>
-              <span class="muted">Total site visits</span>
-            </article>
-            <article class="stat">
-              <strong>Top pages</strong>
-              <ul id="visit-list" class="muted" style="list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px"></ul>
-            </article>
-          </div>
-        </section>
-
-        <section class="form-card" style="padding: 24px">
-          <h2>Manage Publications</h2>
-          <p class="muted">Add metadata, preview links, and optional downloads.</p>
+          <h1>Manage Publications</h1>
+          <p class="muted">
+            Add metadata and embed-ready links (Google Drive preview or hosted web document URLs).
+          </p>
           <form id="pub-form" class="form-grid">
             <div>
               <label for="title">Title</label>
@@ -59,10 +43,6 @@
               <label for="embedLink">Embed Link (preview mode URL)</label>
               <input id="embedLink" name="embedLink" type="url" required />
             </div>
-            <div>
-              <label for="downloadLink">Download Link (optional)</label>
-              <input id="downloadLink" name="downloadLink" type="url" />
-            </div>
             <label style="display:flex; align-items:center; gap:8px;">
               <input type="checkbox" name="featured" style="width:auto" /> Feature on homepage
             </label>
@@ -79,7 +59,6 @@
                   <th>Title</th>
                   <th>Year</th>
                   <th>Category</th>
-                  <th>Download</th>
                   <th>Actions</th>
                 </tr>
               </thead>
