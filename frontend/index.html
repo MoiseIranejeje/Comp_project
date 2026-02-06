@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A modern academic publication platform for Byiringiro Albert." />
+    <title>Byiringiro Albert | Academic Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script defer src="assets/js/animations.js"></script>
+    <script defer src="assets/js/ux.js"></script>
+    <script defer src="assets/js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">Byiringiro Albert, M.Ed., B.Ed.</a>
+        <nav aria-label="Main navigation">
+          <ul class="nav-list">
+            <li><a class="active" href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="../admin/login.html">Admin</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <p class="sub">Educationist · Researcher · Consultant · Kigali, Rwanda</p>
+            <h1>Scholarly ideas, designed for clarity and impact.</h1>
+            <p>
+              A refined academic platform where readers can explore research in protected online mode
+              while maintaining a smooth and elegant reading experience.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Policy & Practice</span>
+              <span class="chip">Teacher Development</span>
+              <span class="chip">Learning Equity</span>
+            </div>
+            <a class="btn btn-primary" href="publications.html">Read Publications</a>
+          </div>
+
+          <aside class="hero-card reveal float">
+            <h2>Academic Mission</h2>
+            <p class="muted">To translate research into practical educational transformation for teachers, leaders, and communities.</p>
+            <div class="stat-grid">
+              <article class="stat">
+                <strong class="count-up" data-target="10">0</strong>
+                <span class="muted">Years of education impact</span>
+                <div class="meter"><div class="meter-fill" style="--fill:0.72"></div></div>
+              </article>
+              <article class="stat">
+                <strong class="count-up" data-target="25">0</strong>
+                <span class="muted">Consulting & training programs</span>
+                <div class="meter"><div class="meter-fill" style="--fill:0.88"></div></div>
+              </article>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="reveal">Featured Publications</h2>
+          <p class="section-intro reveal">Selected works available through read-only online viewer with watermark protections.</p>
+          <div id="featured-list" class="card-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© <span id="year"></span> Byiringiro Albert. All rights reserved.</div>
+    </footer>
+
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  </body>
+</html>
