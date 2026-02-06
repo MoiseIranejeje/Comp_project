@@ -146,6 +146,14 @@ textarea { min-height: 110px; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; }
 
+#visit-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
 .reveal { opacity: 0; transform: translateY(22px); transition: transform 760ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 760ms ease; }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 .float { animation: floatY 7s ease-in-out infinite; }

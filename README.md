@@ -43,17 +43,20 @@ project-root/
     └── routes.py
 ```
 
-## Run Locally
+## Run Locally (Production-Ready Backend)
 
 ```bash
 cd /workspace/Comp_project
-python3 -m http.server 4173
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 backend/app.py
 ```
 
 Then open:
 
-- Frontend: `http://localhost:4173/frontend/index.html`
-- Admin login: `http://localhost:4173/admin/login.html`
+- Frontend: `http://localhost:5000/frontend/index.html`
+- Admin login: `http://localhost:5000/admin/login.html`
 
 ## Admin Credentials (demo)
 
@@ -64,6 +67,6 @@ Then open:
 
 ## Notes
 
-- The current implementation uses `localStorage` for publication metadata writes from the admin dashboard.
-- `data/publications.json` provides initial seed publications.
-- Reader mode expects embed-friendly links (e.g., Google Drive `/preview` URLs).
+- The Flask backend provides admin authentication, publication CRUD, download controls, and visit analytics.
+- `data/publications.json` is still used as a static fallback when the API is unavailable.
+- Reader mode expects embed-friendly links (e.g., Google Drive `/preview` URLs) and optional download links.

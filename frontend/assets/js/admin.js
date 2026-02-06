@@ -1,42 +1,49 @@
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "albert@2026";
-
 function isAuthenticated() {
   return sessionStorage.getItem("adminAuth") === "true";
 }
 
-function initLogin() {
-  const form = document.querySelector("#login-form");
-  if (!form) return;
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const username = form.querySelector("#username").value.trim();
-    const password = form.querySelector("#password").value.trim();
-
-    if (username === ADMIN_USER && password === ADMIN_PASS) {
-      sessionStorage.setItem("adminAuth", "true");
-      window.location.href = "dashboard.html";
-      return;
-    }
-
-    const errorEl = document.querySelector("#login-error");
-    if (errorEl) errorEl.textContent = "Invalid credentials.";
+async function apiLogin(username, password) {
+  const response = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
   });
+  if (!response.ok) throw new Error("Login failed");
+  return response.json();
 }
 
-function getPublications() {
-  const localData = localStorage.getItem("publicationsData");
-  if (!localData) return [];
-  try {
-    return JSON.parse(localData);
-  } catch (error) {
-    return [];
-  }
+async function apiLogout() {
+  await fetch("/api/logout", { method: "POST" });
 }
 
-function savePublications(data) {
-  localStorage.setItem("publicationsData", JSON.stringify(data));
+async function apiGetPublications() {
+  const response = await fetch("/api/publications", { credentials: "same-origin" });
+  if (!response.ok) throw new Error("Failed to load publications");
+  return response.json();
+}
+
+async function apiCreatePublication(payload) {
+  const response = await fetch("/api/publications", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+    body: JSON.stringify(payload)
+  });
+  if (!response.ok) throw new Error("Failed to save");
+}
+
+async function apiDeletePublication(id) {
+  const response = await fetch(`/api/publications/${id}`, {
+    method: "DELETE",
+    credentials: "same-origin"
+  });
+  if (!response.ok) throw new Error("Failed to delete");
+}
+
+async function apiGetVisits() {
+  const response = await fetch("/api/visits", { credentials: "same-origin" });
+  if (!response.ok) throw new Error("Failed to load visits");
+  return response.json();
 }
 
 function renderAdminTable(items) {
@@ -49,6 +56,7 @@ function renderAdminTable(items) {
         <td>${item.title}</td>
         <td>${item.year}</td>
         <td>${item.category}</td>
+        <td>${item.downloadLink ? "Enabled" : "Disabled"}</td>
         <td>
           <button class="btn btn-secondary" data-delete="${item.id}">Delete</button>
         </td>
@@ -57,16 +65,47 @@ function renderAdminTable(items) {
     .join("");
 
   body.querySelectorAll("[data-delete]").forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       const id = button.dataset.delete;
-      const filtered = getPublications().filter((item) => item.id !== id);
-      savePublications(filtered);
-      renderAdminTable(filtered);
+      await apiDeletePublication(id);
+      const refreshed = await apiGetPublications();
+      renderAdminTable(refreshed);
     });
   });
 }
 
-function initDashboard() {
+function renderVisitStats(data) {
+  const total = document.querySelector("#total-visits");
+  const list = document.querySelector("#visit-list");
+  if (total) total.textContent = data.total || 0;
+  if (list) {
+    list.innerHTML = data.pages
+      .map((page) => `<li>${page.path} <span>${page.count}</span></li>`)
+      .join("");
+  }
+}
+
+function initLogin() {
+  const form = document.querySelector("#login-form");
+  if (!form) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const username = form.querySelector("#username").value.trim();
+    const password = form.querySelector("#password").value.trim();
+
+    try {
+      await apiLogin(username, password);
+      sessionStorage.setItem("adminAuth", "true");
+      window.location.href = "dashboard.html";
+    } catch (error) {
+      const errorEl = document.querySelector("#login-error");
+      if (errorEl) errorEl.textContent = "Invalid credentials.";
+    }
+  });
+}
+
+async function initDashboard() {
   if (!document.body.dataset.page || document.body.dataset.page !== "dashboard") return;
 
   if (!isAuthenticated()) {
@@ -75,35 +114,42 @@ function initDashboard() {
   }
 
   const form = document.querySelector("#pub-form");
-  const list = getPublications();
-  renderAdminTable(list);
-
   const logoutButton = document.querySelector("#logout");
+
+  const loadAll = async () => {
+    const list = await apiGetPublications();
+    renderAdminTable(list);
+    const visits = await apiGetVisits();
+    renderVisitStats(visits);
+  };
+
+  await loadAll();
+
   if (logoutButton) {
-    logoutButton.addEventListener("click", () => {
+    logoutButton.addEventListener("click", async () => {
       sessionStorage.removeItem("adminAuth");
+      await apiLogout();
       window.location.href = "login.html";
     });
   }
 
-  form?.addEventListener("submit", (event) => {
+  form?.addEventListener("submit", async (event) => {
     event.preventDefault();
-
     const formData = new FormData(form);
-    const newPublication = {
+    const payload = {
       id: `pub-${Date.now()}`,
       title: String(formData.get("title") || "").trim(),
       abstract: String(formData.get("abstract") || "").trim(),
       year: Number(formData.get("year") || new Date().getFullYear()),
       category: String(formData.get("category") || "General").trim(),
       featured: Boolean(formData.get("featured")),
-      embedLink: String(formData.get("embedLink") || "").trim()
+      embedLink: String(formData.get("embedLink") || "").trim(),
+      downloadLink: String(formData.get("downloadLink") || "").trim() || null
     };
 
-    const updated = [newPublication, ...getPublications()];
-    savePublications(updated);
-    renderAdminTable(updated);
+    await apiCreatePublication(payload);
     form.reset();
+    await loadAll();
   });
 }
 
