@@ -2,16 +2,6 @@ const params = new URLSearchParams(window.location.search);
 const publicationId = params.get("id");
 
 async function fetchPublicationsForReader() {
-  try {
-    const response = await fetch("/api/publications", { credentials: "same-origin" });
-    if (response.ok) {
-      const data = await response.json();
-      if (Array.isArray(data) && data.length) return data;
-    }
-  } catch (error) {
-    console.warn("API unavailable, falling back to static data.");
-  }
-
   const cached = localStorage.getItem("publicationsData");
   if (cached) {
     try {
@@ -46,14 +36,6 @@ function renderMissing(container) {
   `;
 }
 
-function trackVisit() {
-  fetch("/api/visits", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ path: window.location.pathname + window.location.search })
-  }).catch(() => {});
-}
-
 async function initReader() {
   disableCommonSaveShortcuts();
 
@@ -72,7 +54,6 @@ async function initReader() {
       <h1>${publication.title}</h1>
       <p class="meta">${publication.category} · ${publication.year}</p>
       <p class="muted">${publication.abstract}</p>
-      ${publication.downloadLink ? `<a class="btn btn-primary" href="/api/publications/${publication.id}/download">Download</a>` : ""}
     </section>
     <section class="viewer-card reveal">
       <iframe
@@ -88,7 +69,6 @@ async function initReader() {
   `;
 
   window.dispatchEvent(new Event("contentRendered"));
-  trackVisit();
 }
 
 initReader();

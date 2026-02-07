@@ -5,20 +5,7 @@ const appState = {
   publications: []
 };
 
-async function fetchJson(path) {
-  const response = await fetch(path, { credentials: "same-origin" });
-  if (!response.ok) throw new Error(`Failed ${path}`);
-  return response.json();
-}
-
 async function loadPublications() {
-  try {
-    const apiData = await fetchJson("/api/publications");
-    if (Array.isArray(apiData) && apiData.length) return apiData;
-  } catch (error) {
-    console.warn("API unavailable, falling back to static data.");
-  }
-
   const localData = localStorage.getItem("publicationsData");
   if (localData) {
     try {
@@ -49,9 +36,8 @@ function publicationCard(publication) {
       <h3>${publication.title}</h3>
       <p class="meta">${publication.category} · ${publication.year}</p>
       <p class="muted">${publication.abstract}</p>
-      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+      <div style="margin-top:14px;">
         <a class="btn btn-secondary" href="reader.html?id=${publication.id}">Read online</a>
-        ${publication.downloadLink ? `<a class="btn btn-primary" href="/api/publications/${publication.id}/download">Download</a>` : ""}
       </div>
     </article>
   `;
