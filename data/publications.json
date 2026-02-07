@@ -1,0 +1,32 @@
+[
+  {
+    "id": "pub-001",
+    "title": "Transformative Pedagogy in East African Classrooms",
+    "abstract": "An evidence-informed framework for inclusive, student-centered learning in resource-constrained secondary schools.",
+    "year": 2024,
+    "category": "Pedagogy",
+    "featured": true,
+    "embedLink": "https://drive.google.com/file/d/1W4g2h8m3A9m7D4Qf8r2p6v4Jc9K2XvYp/preview",
+    "downloadLink": "https://drive.google.com/uc?id=1W4g2h8m3A9m7D4Qf8r2p6v4Jc9K2XvYp&export=download"
+  },
+  {
+    "id": "pub-002",
+    "title": "Teacher Mentorship Models for Rural Education Systems",
+    "abstract": "Comparative analysis of mentorship structures and their impact on teacher retention and instructional quality.",
+    "year": 2023,
+    "category": "Teacher Development",
+    "featured": true,
+    "embedLink": "https://drive.google.com/file/d/1Q9r2N5v3D8g4T1p7m6X2b9f4Lk3Zc8Ha/preview",
+    "downloadLink": null
+  },
+  {
+    "id": "pub-003",
+    "title": "Assessment Reform and Learning Outcomes in Rwanda",
+    "abstract": "A policy-practice bridge report proposing classroom-centered assessment tools for meaningful progress tracking.",
+    "year": 2022,
+    "category": "Assessment",
+    "featured": false,
+    "embedLink": "https://drive.google.com/file/d/1H2j7B9m4R6s8C3k5P1d0F2n9Yt4Wq7Le/preview",
+    "downloadLink": null
+  }
+]

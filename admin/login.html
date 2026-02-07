@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@600;700&display=swap" rel="stylesheet" />
+    <title>Admin Login | Byiringiro Albert</title>
+    <link rel="stylesheet" href="../frontend/assets/css/main.css" />
+    <script defer src="../frontend/assets/js/admin.js"></script>
+  </head>
+  <body>
+    <main class="section">
+      <div class="container" style="max-width: 480px">
+        <section class="form-card" style="padding: 24px">
+          <h1>Admin Login</h1>
+          <p class="muted">Secure access to publications, downloads, and analytics.</p>
+          <form id="login-form" class="form-grid" autocomplete="off">
+            <div>
+              <label for="username">Username</label>
+              <input id="username" name="username" required />
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" required />
+            </div>
+            <button class="btn btn-primary" type="submit">Sign in</button>
+            <p id="login-error" class="muted" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
